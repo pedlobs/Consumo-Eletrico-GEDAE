@@ -26,9 +26,6 @@ st.markdown(
     uma embarcação elétrica de pequeno porte conhecida regionalmente como rabeta.\
     \n
 
-
-    **👈 Selecione uma opção para visualizar os dados**
-
     ### Quer conhecer mais sobre o grupo? 
     - Visite o nosso [site](https://www.gedae.ufpa.br/)
     - Nos siga no [Instagram](https://www.instagram.com/gedae.ufpa/)

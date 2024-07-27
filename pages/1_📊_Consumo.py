@@ -47,11 +47,6 @@ def load_data(pasta):
 sheet_name = "Dados"
 dados = load_data(sheet_name)
 
-print(dados)
-
-""" while(1):
-    pass """
-
 meses = [
     "Janeiro",
     "Fevereiro",
