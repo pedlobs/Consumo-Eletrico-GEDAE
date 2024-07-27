@@ -2,11 +2,8 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import pandas as pd
 import plotly.express as px
-# import plotly.graph_objects as go
-import os
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import json
 import yaml
 from yaml.loader import SafeLoader
 
@@ -45,6 +42,8 @@ if status_login == False:
 if status_login == None:
     st.warning("Digite seu login e senha")
 if status_login:
+    authenticator.logout('Logout', 'sidebar')
+
     # Credenciais da api do google
     creds_json = {
     "type": st.secrets["google_sheets"]["type"],

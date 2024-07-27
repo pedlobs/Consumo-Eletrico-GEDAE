@@ -26,8 +26,10 @@ if status_login == False:
 if status_login == None:
     st.warning("Digite seu login e senha")
 if status_login:
-    st.write("# Consumo elétrico - Ilha das Onças")
 
+    authenticator.logout('Logout', 'sidebar')
+
+    st.title("Consumo elétrico - Ilha das Onças")
     st.sidebar.success("Selecione uma opção acima.")
 
     st.markdown(

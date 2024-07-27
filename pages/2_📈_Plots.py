@@ -28,4 +28,6 @@ if status_login == False:
 if status_login == None:
     st.warning("Digite seu login e senha")
 if status_login:
+    authenticator.logout('Logout', 'sidebar')
+    
     st.write("# Página em desenvolvimento...:male-mechanic:")

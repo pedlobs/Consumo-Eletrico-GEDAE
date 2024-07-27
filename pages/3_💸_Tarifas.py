@@ -13,7 +13,7 @@ from yaml.loader import SafeLoader
 
 st.set_page_config(
     page_title="Consumo Elétrico - GEDAE",
-    layout="wide",
+    # layout="wide",
     initial_sidebar_state="auto",
     page_icon="📊",
     # page_icon="logoGEDAE.png",
@@ -45,6 +45,8 @@ if status_login == False:
 if status_login == None:
     st.warning("Digite seu login e senha")
 if status_login:
+    authenticator.logout('Logout', 'sidebar')
+    
     # Credenciais da api do google
     creds_json = {
     "type": st.secrets["google_sheets"]["type"],
