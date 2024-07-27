@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.express as px
 # import plotly.graph_objects as go
 import os
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import json
 
 
 st.set_page_config(
@@ -13,39 +16,41 @@ st.set_page_config(
     # page_icon="logoGEDAE.png",
 )
 
+creds_json = {
+    "type": st.secrets["google_sheets"]["type"],
+    "project_id": st.secrets["google_sheets"]["project_id"],
+    "private_key_id": st.secrets["google_sheets"]["private_key_id"],
+    "private_key": st.secrets["google_sheets"]["private_key"].replace('\\n', '\n'),
+    "client_email": st.secrets["google_sheets"]["client_email"],
+    "client_id": st.secrets["google_sheets"]["client_id"],
+    "auth_uri": st.secrets["google_sheets"]["auth_uri"],
+    "token_uri": st.secrets["google_sheets"]["token_uri"],
+    "auth_provider_x509_cert_url": st.secrets["google_sheets"]["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": st.secrets["google_sheets"]["client_x509_cert_url"]
+}
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
+client = gspread.authorize(creds)
+
 
 @st.cache_data
 def load_data(pasta):
-    lista = []
-    for arquivo in os.listdir(pasta):
-        nome = arquivo.replace(".csv", "")
-        dir_arquivo = os.path.join(pasta, arquivo)
-        try:  # Evita erros de codificação ao ler os arquivos CSV
-            df = pd.read_csv(
-                dir_arquivo,
-                sep=";",
-                encoding="utf-8",
-                parse_dates=["Data"],
-                dayfirst=True,
-            )
-        except UnicodeDecodeError:
-            df = pd.read_csv(
-                dir_arquivo,
-                sep=";",
-                encoding="ISO-8859-1",
-                parse_dates=["Data"],
-                dayfirst=True,
-            )
-        df.set_index("Data", inplace=True)
-        df.rename(columns={"Consumo(kWh)": f"{nome} (kWh)"}, inplace=True)
-        lista.append(df)
-        df = pd.concat(lista, axis=1).fillna(0)
+    sheet = client.open(sheet_name).sheet1
+    data = sheet.get_all_records()
+    df = pd.DataFrame(data)
+    df['Data'] = pd.to_datetime(df['Data'])
+    df.set_index('Data', inplace=True)
     return df
 
 
-# Carregaa dados da pasta "Dados"
-pasta_dados = "Dados"
-dados = load_data(pasta_dados)
+# Carrega os dados da planilha do google
+sheet_name = "Dados"
+dados = load_data(sheet_name)
+
+print(dados)
+
+""" while(1):
+    pass """
 
 meses = [
     "Janeiro",

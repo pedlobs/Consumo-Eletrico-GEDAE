@@ -1,7 +1,5 @@
 import streamlit as st
 
-import streamlit as st
-
 st.set_page_config(
     # layout="wide",
     page_title="Início",
@@ -16,8 +14,8 @@ st.markdown(
     """
     O presente dashboard contém dados acerca do consumo elétrico em uma 
     das comunidades atendidas eletricamente pelo Grupo de Estudos e Desenvolvimento de 
-    Alternativas Energéticas(GEDAE) a aprtir de dados coletados po um medidor de consumo 
-    de energia desenvolvido por [Pedro Bentes Lobato](http://lattes.cnpq.br/9753927402598189).
+    Alternativas Energéticas(GEDAE) a partir de dados coletados por um medidor de consumo 
+    de energia desenvolvido pelo discente do curso de bacharelado en Engenharia Elétrica da UFPA [Pedro Bentes Lobato](http://lattes.cnpq.br/9753927402598189).
     \n
     O projeto "Nanorrede de Distribuição C.C. de Estrutura Aberta Aplicada a Edificações 
     Ribeirinhas da Amazônia" é coordenado pelo [Prof. Dr. Wilson Negrão Macêdo](http://lattes.cnpq.br/3386249951714088)
