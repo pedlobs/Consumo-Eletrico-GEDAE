@@ -2,3 +2,7 @@ streamlit
 pandas
 numpy
 plotly
+yaml
+gspread
+json
+oauth2client
