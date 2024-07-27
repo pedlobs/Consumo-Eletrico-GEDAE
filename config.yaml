@@ -1,0 +1,18 @@
+credentials:
+  usernames:
+    pedlobs:
+      email: pedlobs@gmail.com
+      name: Pedro Lobato
+      password: $2b$12$n3euz2kD.uinhryZAyXo2.GtpUHG/FmpT7kfSbuUO.jDbQdzKhGXO # To be replaced with hashed password
+    wnmacedo:
+      email: wnmacedo@ufpa.com
+      name: Wilson Negrão
+      password: $2b$12$km76mPtQEdfAOcY.zASsfuujyMdS1ZgBFeSRo..PM3XeDU8fQyCjS # To be replaced with hashed password
+    ilha_das_oncas:
+      email: wnmacedo@ufpa.com
+      name: Ilha das Onças
+      password: $2b$12$km76mPtQEdfAOcY.zASsfuujyMdS1ZgBFeSRo..PM3XeDU8fQyCjS # To be replaced with hashed password
+cookie:
+  expiry_days: 15
+  key: lkmcvnokjdnveio # Must be string
+  name: dashboard_consumo
