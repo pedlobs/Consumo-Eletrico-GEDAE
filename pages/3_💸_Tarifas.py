@@ -124,7 +124,8 @@ if status_login:
     dados_filtrados.drop(columns=residencias_sem_dados, inplace=True)
 
     for residencia in dados_filtrados.columns.dropna():
-        st.subheader(f"{residencia.replace(" (kWh)", "")}: R${dados_filtrados[residencia].sum():.2f}")
+        nome_pessoa = residencia.replace(" (kWh)", "")
+        st.subheader(f"{nome_pessoa}: R${dados_filtrados[residencia].sum():.2f}")
 
         consumo_total_mensal = dados_filtrados[residencia].sum()
 
