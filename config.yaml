@@ -14,5 +14,3 @@ credentials:
       password: $2b$12$km76mPtQEdfAOcY.zASsfuujyMdS1ZgBFeSRo..PM3XeDU8fQyCjS # To be replaced with hashed password
 cookie:
   expiry_days: 15
-  key: lkmcvnokjdnveio # Must be string
-  name: dashboard_consumo

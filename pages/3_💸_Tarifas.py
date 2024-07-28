@@ -34,8 +34,8 @@ with open('config.yaml') as file:
 
 authenticator = stauth.Authenticate(
     config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
+    st.secrets["cookies"]['name'],
+    st.secrets["cookies"]["key"]
 )
 
 nome, status_login, user = authenticator.login()
@@ -46,7 +46,7 @@ if status_login == None:
     st.warning("Digite seu login e senha")
 if status_login:
     authenticator.logout('Logout', 'sidebar')
-    
+
     # Credenciais da api do google
     creds_json = {
     "type": st.secrets["google_sheets"]["type"],

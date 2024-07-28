@@ -31,8 +31,8 @@ with open('config.yaml') as file:
 
 authenticator = stauth.Authenticate(
     config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
+    st.secrets["cookies"]['name'],
+    st.secrets["cookies"]["key"]
 )
 
 nome, status_login, user = authenticator.login()
