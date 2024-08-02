@@ -8,6 +8,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 import yaml
+from io import BytesIO
 from yaml.loader import SafeLoader
 
 
@@ -18,6 +19,11 @@ st.set_page_config(
     page_icon="📊",
     # page_icon="logoGEDAE.png",
 )
+
+@st.cache_data
+def convert_df(df,nome):
+
+    return df.to_csv(index = False, sep=";").encode("utf-8")
 
 @st.cache_data
 def load_data(pasta):
@@ -125,9 +131,25 @@ if status_login:
     residencias_sem_dados = dados_filtrados.columns[(dados_filtrados == 0).all()]
     dados_filtrados.drop(columns=residencias_sem_dados, inplace=True)
 
+    consumos = {}
+
     for residencia in dados_filtrados.columns.dropna():
         nome_pessoa = residencia.replace(" (kWh)", "")
-        st.subheader(f"{nome_pessoa}: R${dados_filtrados[residencia].sum():.2f}")
+        # st.subheader(f"{nome_pessoa}: R${dados_filtrados[residencia].sum():.2f}")
+        consumos[residencia] = F"R${dados_filtrados[residencia].sum():.2f}"
 
         consumo_total_mensal = dados_filtrados[residencia].sum()
+
+    # Transformar os valores em listas
+    consumos = {key: [value] for key, value in consumos.items()}
+
+    csv = pd.DataFrame(consumos, index=["Valor"])
+
+    st.write(csv)
+
+    arquivo = convert_df(csv, f"Consumo_{meses[mes_selecionado-1]}.csv")
+
+    st.download_button(label='Clique aqui para baixar',
+                                data=arquivo ,
+                                file_name= f"Consumo_{meses[mes_selecionado-1]}.csv")
 
