@@ -83,8 +83,6 @@ if status_login:
 
     dfs = load_data(nomes_abas)
 
-    st.write(dfs)
-
     meses = [
         "Janeiro",
         "Fevereiro",
