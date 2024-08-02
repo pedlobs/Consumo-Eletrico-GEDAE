@@ -20,15 +20,24 @@ st.set_page_config(
 
 
 @st.cache_data
-def load_data(folha):
+def load_data(nomes_abas):
     sheet_name = "Dados"
     spreadsheet = client.open(sheet_name)
-    sheet = spreadsheet.worksheet(folha)
-    data = sheet.get_all_records()
-    df = pd.DataFrame(data)
-    df["Hora"] = pd.to_datetime(df["Hora"])
-    df.set_index(df["Hora"], inplace=True)
-    return df
+
+    # Cria o dicionário
+    dfs = {}
+            
+    for aba in nomes_abas:
+        sheet = spreadsheet.worksheet(aba)
+        data = sheet.get_all_records()
+        try:
+            dfs[aba] = pd.DataFrame(data)
+            dfs[aba]["Hora"] = pd.to_datetime(dfs[aba]["Hora"])
+            dfs[aba].set_index(dfs[aba]["Hora"], inplace=True)
+        except Exception as e:
+            st.error(f"Erro ao acessar dados da aba {aba}: {e}")
+
+    return dfs
 
 
 with open("config.yaml") as file:
@@ -70,8 +79,11 @@ if status_login:
     client = gspread.authorize(creds)
 
     # Carrega os dados da planilha do google
-    nome_arquivo = "Sr João"
-    dados = load_data(nome_arquivo)
+    nomes_abas = ["Sr João", "Sr Matoso", "Sr Yuri", "Sr Raul", "Sr Bruno"]
+
+    dfs = load_data(nomes_abas)
+
+    st.write(dfs)
 
     meses = [
         "Janeiro",
@@ -88,12 +100,19 @@ if status_login:
         "Dezembro",
     ]
 
+    # Sidebar para selecionar o mês e ano
+    st.sidebar.title("Navegação")
+
+    # Selectbox para escolher o DataFrame a ser analisado
+    residencia_escolhida = st.sidebar.selectbox("Selecione a residência", nomes_abas)
+
+    dados = dfs[residencia_escolhida]
+
     # Obter os meses e anos únicos dos dados
     meses_disponiveis = sorted(dados.index.month.unique())
     anos_disponiveis = sorted(dados.index.year.unique())
 
-    # Sidebar para selecionar o mês e ano
-    st.sidebar.title("Navegação")
+    
     mes_selecionado = st.sidebar.selectbox(
         "Selecione o mês", meses_disponiveis, format_func=lambda x: meses[x - 1]
     )
@@ -119,7 +138,7 @@ if status_login:
 
     consumo = dia_selecionado["Consumo(kWh)"].iloc[-1]
     data = dia_selecionado.iloc[0]["Hora"].strftime("%d/%m/%Y")
-    nome = f"Consumo {nome_arquivo} {data} \t Consumo={consumo:.3f} kWh"
+    nome = f"Consumo {residencia_escolhida} {data} \t Consumo={consumo:.3f} kWh"
 
     # Cria o subplot
     plot = make_subplots(
