@@ -20,10 +20,21 @@ st.set_page_config(
     # page_icon="logoGEDAE.png",
 )
 
+st.markdown("""
+        <style>
+               .block-container {
+                    padding-top: 0rem;
+                    padding-bottom: 0rem;
+                    padding-left: 5rem;
+                    padding-right: 5rem;
+                }
+        </style>
+        """, unsafe_allow_html=True)
+
 @st.cache_data
 def convert_df(df,nome):
 
-    return df.to_csv(index = False, sep=";").encode("utf-8")
+    return df.to_csv(index = False, sep=";", encoding= 'utf-8-sig') #.encode("utf-8")
 
 @st.cache_data
 def load_data(pasta):
@@ -122,32 +133,20 @@ if status_login:
         )
 
     consumo_medio_mensal = pd.DataFrame.from_dict(
-        consumo_medio_mensal_dict, orient="index", columns=["Consumo(kWh)"]
+        consumo_medio_mensal_dict, orient="index", columns=["Valor (R$)"]
     ).dropna()
-
+   
     consumo_medio_mensal.reset_index(inplace=True)
     consumo_medio_mensal.rename(columns={"index": "Residência"}, inplace=True)
 
     residencias_sem_dados = dados_filtrados.columns[(dados_filtrados == 0).all()]
     dados_filtrados.drop(columns=residencias_sem_dados, inplace=True)
+    
+    consumo_medio_mensal["Valor (R$)"] = consumo_medio_mensal["Valor (R$)"].multiply(30).round(2)
+    consumo_medio_mensal["Residência"] = consumo_medio_mensal["Residência"].str.replace(' \(kWh\)', '', regex=True)
 
-    consumos = {}
-
-    for residencia in dados_filtrados.columns.dropna():
-        nome_pessoa = residencia.replace(" (kWh)", "")
-        # st.subheader(f"{nome_pessoa}: R${dados_filtrados[residencia].sum():.2f}")
-        consumos[residencia] = F"R${dados_filtrados[residencia].sum():.2f}"
-
-        consumo_total_mensal = dados_filtrados[residencia].sum()
-
-    # Transformar os valores em listas
-    consumos = {key: [value] for key, value in consumos.items()}
-
-    csv = pd.DataFrame(consumos, index=["Valor"])
-
-    st.write(csv)
-
-    arquivo = convert_df(csv, f"Consumo_{meses[mes_selecionado-1]}.csv")
+    st.write(consumo_medio_mensal)
+    arquivo = convert_df(consumo_medio_mensal, f"Consumo_{meses[mes_selecionado-1]}.csv")
 
     st.download_button(label='Clique aqui para baixar',
                                 data=arquivo ,
