@@ -121,12 +121,11 @@ if status_login:
     meses_disponiveis = sorted(dados.index.month.unique())
     anos_disponiveis = sorted(dados.index.year.unique())
 
-    
+    ano_selecionado = st.sidebar.selectbox("Selecione o ano", anos_disponiveis)
     mes_selecionado = st.sidebar.selectbox(
         "Selecione o mês", meses_disponiveis, format_func=lambda x: meses[x - 1]
     )
-    ano_selecionado = st.sidebar.selectbox("Selecione o ano", anos_disponiveis)
-
+    
     # Título do Dashboard
     st.title(f"Curvas de carga - {meses[mes_selecionado-1]} {ano_selecionado}")
 
@@ -141,7 +140,7 @@ if status_login:
     dias_disponiveis.sort()
 
     # Seletor de dias no corpo principal da página
-    dia_selecionado = st.selectbox("Selecione o Dia", dias_disponiveis)
+    dia_selecionado = st.sidebar.selectbox("Selecione o Dia", dias_disponiveis)
 
     dia_selecionado = dados_filtrados[dados_filtrados.index.day == dia_selecionado]
 
