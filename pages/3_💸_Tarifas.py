@@ -2,7 +2,7 @@ import streamlit as st
 import streamlit_authenticator as stauth
 import pandas as pd
 import plotly.express as px
-# import plotly.graph_objects as go
+from unidecode import unidecode
 import os
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -33,7 +33,6 @@ st.markdown("""
 
 @st.cache_data
 def convert_df(df,nome):
-
     return df.to_csv(index = False, sep=";", encoding= 'utf-8-sig') #.encode("utf-8")
 
 @st.cache_data
@@ -146,6 +145,10 @@ if status_login:
     consumo_medio_mensal["Residência"] = consumo_medio_mensal["Residência"].str.replace(' \(kWh\)', '', regex=True)
 
     st.write(consumo_medio_mensal)
+
+    consumo_medio_mensal.columns = [unidecode(col.replace(' (kWh)', '')) for col in consumo_medio_mensal.columns]
+    consumo_medio_mensal = consumo_medio_mensal.applymap(lambda x: unidecode(str(x)) if isinstance(x, str) else x)
+
     arquivo = convert_df(consumo_medio_mensal, f"Consumo_{meses[mes_selecionado-1]}.csv")
 
     st.download_button(label='Clique aqui para baixar',
