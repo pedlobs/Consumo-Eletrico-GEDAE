@@ -7,7 +7,6 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import yaml
 from yaml.loader import SafeLoader
-import matplotlib.pyplot as plt
 
 
 st.set_page_config(
