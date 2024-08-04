@@ -18,7 +18,8 @@ st.set_page_config(
     # page_icon="logoGEDAE.png",
 )
 
-st.markdown("""
+st.markdown(
+    """
         <style>
                .block-container {
                     padding-top: 0rem;
@@ -27,7 +28,9 @@ st.markdown("""
                     padding-right: 5rem;
                 }
         </style>
-        """, unsafe_allow_html=True)
+        """,
+    unsafe_allow_html=True,
+)
 
 
 @st.cache_data
@@ -37,7 +40,7 @@ def load_data(nomes_abas):
 
     # Cria o dicionário
     dfs = {}
-            
+
     for aba in nomes_abas:
         sheet = spreadsheet.worksheet(aba)
         data = sheet.get_all_records()
@@ -125,7 +128,7 @@ if status_login:
     mes_selecionado = st.sidebar.selectbox(
         "Selecione o mês", meses_disponiveis, format_func=lambda x: meses[x - 1]
     )
-    
+
     # Título do Dashboard
     st.title(f"Curvas de carga - {meses[mes_selecionado-1]} {ano_selecionado}")
 
@@ -203,30 +206,16 @@ if status_login:
     plot.update_xaxes(title_text="Hora", row=1, col=2)
     plot.update_xaxes(title_text="Hora", row=2, col=1)
     plot.update_xaxes(title_text="Hora", row=2, col=2)
-    plot.update_xaxes(
-        mirror=True,
-        ticks="outside",
-        showline=True,
-        linecolor="Black",
-        gridcolor="White",
-    )
 
     # Atualiza os exios y
     plot.update_yaxes(title_text="Potência (W)", row=1, col=1)
     plot.update_yaxes(title_text="Consumo (kWh)", row=1, col=2)
     plot.update_yaxes(title_text="Corrente (A)", row=2, col=1)
     plot.update_yaxes(title_text="Tensão (V)", row=2, col=2)
-    plot.update_yaxes(
-        mirror=True,
-        ticks="outside",
-        showline=True,
-        linecolor="black",
-        gridcolor="lightgrey",
-    )
 
     # Atualiza o layout do plot
     plot.update_layout(title_text=nome, height=700)
-    plot.update_layout(plot_bgcolor="white")
+    # plot.update_layout(plot_bgcolor="white")
     plot.update_layout(
         legend=dict(orientation="h", yanchor="middle", y=-0.25, xanchor="center", x=0.5)
     )
