@@ -16,7 +16,7 @@ st.set_page_config(
     page_title="Consumo Elétrico - GEDAE",
     # layout="wide",
     initial_sidebar_state="auto",
-    page_icon="📊",
+    page_icon="💸",
     # page_icon="logoGEDAE.png",
 )
 

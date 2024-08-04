@@ -1,8 +1,6 @@
 import streamlit as st
 import streamlit_authenticator as stauth
 import pandas as pd
-import plotly.express as px
-from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -14,7 +12,7 @@ st.set_page_config(
     page_title="Curvas de carga - GEDAE",
     layout="wide",
     initial_sidebar_state="auto",
-    page_icon="📈",
+    page_icon="💸",
     # page_icon="logoGEDAE.png",
 )
 
@@ -118,11 +116,6 @@ if status_login:
         "Novembro",
         "Dezembro",
     ]
-
-    # Sidebar para selecionar o mês e ano
-    # st.sidebar.title("Navegação")
-
-
 
     # Selectbox para escolher o DataFrame a ser analisado
     residencias_escolhidas = st.sidebar.multiselect(
