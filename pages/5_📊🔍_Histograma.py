@@ -113,7 +113,8 @@ if status_login:
             df = dados[residencia]
             df = df.loc[(df != 0)]
 
-            fig = px.histogram(df, marginal="box")
+            fig = px.histogram(df, marginal="box",histnorm="percent", labels={"percent": "# Pedidos", "value": "Consumo (kWh)"})
+            fig.layout.update(showlegend=False)
+            #fig.update_yaxes(title_text="Frequência (%)")
 
             st.plotly_chart(fig)
-            pass
