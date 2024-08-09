@@ -85,11 +85,15 @@ if status_login:
         ],
         "Arilson Moraes Borges": [
             "fotos/Arilson_Moraes.JPG",
-            "Discente de engenharia elétrica na Universidade Federal do Pará (UFPA) e bolsista no Grupo de Estudos E Desenvolvimento de Alternativas Energéticas (GEDAE)",
+            "Discente de engenharia elétrica na Universidade Federal do Pará (UFPA) e bolsista no Grupo de Estudos E Desenvolvimento de Alternativas Energéticas (GEDAE).",
         ],
         "Victor Parente de Oliveira Alves": [
             "fotos/Victor_Parente.JPG",
-            "Concluiu, pela Universidade Federal do Pará (UFPA), a Graduação e Mestrado em Engenharia Elétrica. Atualmente, é doutorando pelo Programa de Pós-Graduação em Engenharia Elétrica (PPGEE) na mesma instituição. É integrante do GEDAE (Grupo de Estudos e Desenvolvimento de Alternativas Energéticas) da Universidade Federal do Pará desde 2017, onde tem a oportunidade de atuar em projetos de diferentes naturezas. Seu interesse em pesquisa engloba as seguintes áreas: fontes renováveis de energia, sistemas isolados, sistemas em corrente contínua, eletrônica de potência e smart grids",
+            "Concluiu, pela Universidade Federal do Pará (UFPA), a Graduação e Mestrado em Engenharia Elétrica. Atualmente, é doutorando pelo Programa de Pós-Graduação em Engenharia Elétrica (PPGEE) na mesma instituição. É integrante do GEDAE (Grupo de Estudos e Desenvolvimento de Alternativas Energéticas) da Universidade Federal do Pará desde 2017, onde tem a oportunidade de atuar em projetos de diferentes naturezas. Seu interesse em pesquisa engloba as seguintes áreas: fontes renováveis de energia, sistemas isolados, sistemas em corrente contínua, eletrônica de potência e smart grids.",
+        ],
+        "Ilan Sampaio Lima": [
+            "fotos/Ilan_Lima.JPG",
+            "Discente de Engenharia Elétrica pela Universidade Federal do Pará. Atualmente, atua como bolsista de iniciação científica no GEDAE/UFPA. Possui experiência em linguagens de programação como Python e C++, uso de energias renováveis e sistemas de energia solar fotovoltaica. É membro do Grupo de Estudos e Desenvolvimento de Alternativas Energéticas (GEDAE), onde reealiza atividades de pesquisa. Como hobbies, pratica de ciclismo, dedica-se ao aprendizado de guitarra e estuda empreendedorismo, com ênfase no desenvolvimento e gestão de startups.",
         ],
     }
 

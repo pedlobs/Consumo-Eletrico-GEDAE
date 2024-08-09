@@ -215,7 +215,6 @@ if status_login:
 
     # Atualiza o layout do plot
     plot.update_layout(title_text=nome, height=700)
-    # plot.update_layout(plot_bgcolor="white")
     plot.update_layout(
         legend=dict(orientation="h", yanchor="middle", y=-0.25, xanchor="center", x=0.5)
     )
