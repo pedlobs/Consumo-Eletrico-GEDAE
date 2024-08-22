@@ -10,6 +10,7 @@ import json
 import yaml
 from io import BytesIO
 from yaml.loader import SafeLoader
+import calendar
 
 
 st.set_page_config(
@@ -113,6 +114,8 @@ if status_login:
         f"Tarifa por consumo elétrico - {meses[mes_selecionado-1]} {ano_selecionado}"
     )
 
+    temp, dias_mês = calendar.monthrange(ano_selecionado, mes_selecionado)
+
     # Filtrar dados para o mês e ano selecionados
     dados_filtrados = dados[
         (dados.index.month == mes_selecionado) & (dados.index.year == ano_selecionado)
@@ -141,7 +144,7 @@ if status_login:
     residencias_sem_dados = dados_filtrados.columns[(dados_filtrados == 0).all()]
     dados_filtrados.drop(columns=residencias_sem_dados, inplace=True)
     
-    consumo_medio_mensal["Valor (R$)"] = consumo_medio_mensal["Valor (R$)"].multiply(30).round(2)
+    consumo_medio_mensal["Valor (R$)"] = consumo_medio_mensal["Valor (R$)"].multiply(dias_mês).round(2)
     consumo_medio_mensal["Residência"] = consumo_medio_mensal["Residência"].str.replace(' \(kWh\)', '', regex=True)
 
     st.write(consumo_medio_mensal)
