@@ -88,33 +88,13 @@ if status_login:
 
     colunas = dados.columns
 
-    parametro_selecionado = st.sidebar.radio(
-        "Escolha o parâmetro:",
-        ["Consumo(kWh)", "Potencia(W)", "Corrente RMS(A)", "Tensao RMS(V)"],
-        horizontal=False,
-    )
+    for residencia in colunas:
+        st.subheader(residencia.replace(" (kWh)", ""))
+        df = dados[residencia]
+        df = df.loc[(df != 0)]
 
-    if parametro_selecionado in ["Potencia(W)", "Corrente RMS(A)", "Tensao RMS(V)"]:
-        st.title("Em desenvolvimento...")
-        for residencia in nomes_abas:
-            break
-            st.subheader(residencia)
-            df = dfs[residencia]
+        fig = px.histogram(df, marginal="box",histnorm="percent", labels={"percent": "# Pedidos", "value": "Consumo (kWh)"})
+        fig.layout.update(showlegend=False)
+        #fig.update_yaxes(title_text="Frequência (%)")
 
-            # fig = go.Figure(data=[go.Histogram(x=df[parametro_selecionado], nbinsx=20)])
-            # fig.update_layout(bargap=0)
-            fig = px.histogram(df, x=parametro_selecionado, nbins=30, marginal="violin")
-            fig.update_yaxes(title_text="Frequência")
-            st.plotly_chart(fig)
-
-    else:
-        for residencia in colunas:
-            st.subheader(residencia.replace(" (kWh)", ""))
-            df = dados[residencia]
-            df = df.loc[(df != 0)]
-
-            fig = px.histogram(df, marginal="box",histnorm="percent", labels={"percent": "# Pedidos", "value": "Consumo (kWh)"})
-            fig.layout.update(showlegend=False)
-            #fig.update_yaxes(title_text="Frequência (%)")
-
-            st.plotly_chart(fig)
+        st.plotly_chart(fig)
