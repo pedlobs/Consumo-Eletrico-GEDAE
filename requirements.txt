@@ -6,4 +6,3 @@ plotly
 gspread
 oauth2client
 unidecode
-calendar
