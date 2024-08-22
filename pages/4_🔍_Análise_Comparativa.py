@@ -155,32 +155,36 @@ if status_login:
         )
         dia_selecionado = st.sidebar.selectbox("Selecione o dia", dias_em_comum)
 
-        for residencia in residencias_escolhidas:
-            df = dfs[residencia]
-            df_filtrado = df[
-                (df.index.year == ano_selecionado)
-                & (df.index.month == mes_selecionado)
-                & (df.index.day == dia_selecionado)
-            ]
+        cols = st.columns(2)
 
-            consumo = df_filtrado["Consumo(kWh)"].iloc[-1]
+        for i, residencia in enumerate(residencias_escolhidas):
+            with cols[i % 2]:
+                df = dfs[residencia]
+                df_filtrado = df[
+                    (df.index.year == ano_selecionado)
+                    & (df.index.month == mes_selecionado)
+                    & (df.index.day == dia_selecionado)
+                ]
 
-            plot = go.Figure()
+                consumo = df_filtrado["Consumo(kWh)"].iloc[-1]
 
-            plot.add_trace(
-                go.Scatter(
-                    x=df_filtrado["Hora"],
-                    y=df_filtrado[parametro_selecionado],
-                    name=parametro_selecionado,
-                    marker={"color": cor_plot[parametro_selecionado]},
+                plot = go.Figure()
+
+                plot.add_trace(
+                    go.Scatter(
+                        x=df_filtrado["Hora"],
+                        y=df_filtrado[parametro_selecionado],
+                        name=parametro_selecionado,
+                        marker={"color": cor_plot[parametro_selecionado]},
+                    )
                 )
-            )
 
-            plot.update_xaxes(title_text="Hora")
-            plot.update_yaxes(title_text=parametro_selecionado)
-            plot.update_layout(title_text=f"{residencia} - {consumo} kWh")
+                plot.update_xaxes(title_text="Hora")
+                plot.update_yaxes(title_text=parametro_selecionado)
+                plot.update_layout(title_text=f"{residencia} - {consumo} kWh")
 
-            st.plotly_chart(plot)
-
+                st.plotly_chart(plot) 
+            
+        
     elif len(residencias_escolhidas) <= 1:
         st.warning("Selecione ao menos duas residências para comparar os parâmetros.")
