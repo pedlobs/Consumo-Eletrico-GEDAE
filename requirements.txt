@@ -1,8 +1,8 @@
-streamlit
-streamlit_authenticator 
-pandas
-numpy
-plotly
-gspread
-oauth2client
-unidecode
+streamlit == 1.32.2
+streamlit_authenticator == 0.3.3
+pandas == 2.1.4
+numpy == 1.26.3
+plotly == 5.18.0   
+gspread == 6.1.2
+oauth2client == 4.1.3
+unidecode == 
