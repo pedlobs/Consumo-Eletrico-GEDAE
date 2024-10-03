@@ -135,7 +135,7 @@ if status_login:
         st.write(dados_filtrados[coluna])
 
         invalid_values = dados_filtrados[~dados_filtrados[coluna].apply(lambda x: str(x).replace('.', '', 1).isdigit())]
-        print(invalid_values)
+        st.write(invalid_values)
 
 
         consumo_medio_mensal_dict[coluna] = (
