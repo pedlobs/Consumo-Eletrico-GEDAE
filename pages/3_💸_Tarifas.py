@@ -132,7 +132,7 @@ if status_login:
         dias_com_dados_por_casa[coluna] = contagem_dias_diferentes_de_zero.sum()
 
 
-        st.write(dados_filtrados[coluna])
+        #st.write(dados_filtrados[coluna])
 
         invalid_values = dados_filtrados[~dados_filtrados[coluna].apply(lambda x: str(x).replace('.', '', 1).isdigit())]
         st.write(invalid_values)
