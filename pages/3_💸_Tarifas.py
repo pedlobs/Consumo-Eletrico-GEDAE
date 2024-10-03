@@ -130,6 +130,11 @@ if status_login:
             dias_com_dados.index
         ).sum()
         dias_com_dados_por_casa[coluna] = contagem_dias_diferentes_de_zero.sum()
+
+        st.write(dias_com_dados_por_casa[coluna])
+
+        st.write(dados_filtrados[coluna])
+
         consumo_medio_mensal_dict[coluna] = (
             dados_filtrados[coluna].to_numpy().sum() / dias_com_dados_por_casa[coluna]
         )
