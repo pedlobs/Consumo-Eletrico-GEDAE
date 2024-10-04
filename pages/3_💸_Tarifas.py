@@ -124,6 +124,8 @@ if status_login:
     dias_com_dados_por_casa = {}
     consumo_medio_mensal_dict = {}
 
+    dados_filtrados = dados_filtrados.astype(float)
+
     for coluna in dados_filtrados.columns:
         dias_com_dados = dados_filtrados[coluna] != 0
         contagem_dias_diferentes_de_zero = dias_com_dados.groupby(
