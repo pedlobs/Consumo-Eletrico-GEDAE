@@ -124,7 +124,7 @@ if status_login:
     dias_com_dados_por_casa = {}
     consumo_medio_mensal_dict = {}
 
-    dados_filtrados = dados_filtrados.astype(float)
+    #dados_filtrados = dados_filtrados.astype(float)
 
     for coluna in dados_filtrados.columns:
         st.dataframe(dados_filtrados[coluna])
