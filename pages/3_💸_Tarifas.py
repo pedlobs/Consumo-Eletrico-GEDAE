@@ -127,6 +127,7 @@ if status_login:
     dados_filtrados = dados_filtrados.astype(float)
 
     for coluna in dados_filtrados.columns:
+        st.dataframe(dados_filtrados[coluna])
         dias_com_dados = dados_filtrados[coluna] != 0
         contagem_dias_diferentes_de_zero = dias_com_dados.groupby(
             dias_com_dados.index
