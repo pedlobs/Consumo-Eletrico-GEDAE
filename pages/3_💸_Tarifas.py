@@ -134,13 +134,6 @@ if status_login:
         ).sum()
         dias_com_dados_por_casa[coluna] = contagem_dias_diferentes_de_zero.sum()
 
-
-        #st.write(dados_filtrados[coluna])
-
-        invalid_values = dados_filtrados[~dados_filtrados[coluna].apply(lambda x: str(x).replace('.', '', 1).isdigit())]
-        st.write(invalid_values)
-
-
         consumo_medio_mensal_dict[coluna] = (
             dados_filtrados[coluna].to_numpy().sum() / dias_com_dados_por_casa[coluna]
         )
